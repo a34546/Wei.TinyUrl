@@ -38,7 +38,6 @@ namespace Wei.TinyUrl.Api.Controllers
         /// </summary>
         /// <param name="url">需要生成的长网址</param>
         /// <param name="key">密匙</param>
-        /// <param name="monthCount">有效多少个月，为null,为永久</param>
         /// <returns></returns>
         [HttpGet("api/create")]
         public async Task<IActionResult> GenerateTinyUrl(string url, string key)

@@ -17,7 +17,7 @@ namespace Wei.TinyUrl.Data.Entities
         public string Key { get; set; }
 
         /// <summary>
-        /// 有效天数
+        /// 有效天数，为null时，可永久访问
         /// </summary>
         public int? Days { get; set; }
     }
