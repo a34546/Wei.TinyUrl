@@ -26,7 +26,6 @@ namespace Wei.TinyUrl.Api.Controllers
         public string Hello()
         {
             return $@"
-                    领健短网址平台
                     生成短网址使用示例：
                     GET：{_serverUrl}/api/create?url=http://www.baidu.com&key=123456789
                     返回结果：{_serverUrl}/WPysCS
