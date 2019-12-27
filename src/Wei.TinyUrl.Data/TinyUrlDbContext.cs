@@ -7,7 +7,7 @@ using Wei.TinyUrl.Data.Entities;
 
 namespace Wei.TinyUrl.Data
 {
-    public class TinyUrlDbContext : UnitOfWorkDbContext
+    public class TinyUrlDbContext : BaseDbContext
     {
         public TinyUrlDbContext(DbContextOptions options) : base(options)
         {

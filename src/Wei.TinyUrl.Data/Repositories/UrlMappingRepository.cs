@@ -25,7 +25,7 @@ namespace Wei.TinyUrl.Data.Repositories
         public async Task<string> GenerateTinyUrl(string url, string key)
         {
             if (!_cache.TryGetValue(key, out Client client)) throw new Exception(" key is error");
-            if (await QueryNoTracking.AnyAsync(x => x.Url.Equals(url, StringComparison.CurrentCultureIgnoreCase))) return (await QueryNoTracking.FirstOrDefaultAsync(x => x.Url == url))?.Code;
+            if (await QueryNoTracking().AnyAsync(x => x.Url.Equals(url, StringComparison.CurrentCultureIgnoreCase))) return (await QueryNoTracking().FirstOrDefaultAsync(x => x.Url == url))?.Code;
             var code = Utils.GenerateCode(6);
             while (!await IsUnique(code))
             {
@@ -45,13 +45,13 @@ namespace Wei.TinyUrl.Data.Repositories
         public async Task<string> GetUrlByCode(string code)
         {
             var now = DateTime.Now;
-            return (await QueryNoTracking.Where(x => x.IsDelete == false).OrderByDescending(x => x.Id).FirstOrDefaultAsync(x => x.Code == code && (!x.ExpiryTime.HasValue || x.ExpiryTime.HasValue && x.ExpiryTime.Value > now)))?.Url;
+            return (await QueryNoTracking(x => x.IsDelete == false).OrderByDescending(x => x.Id).FirstOrDefaultAsync(x => x.Code == code && (!x.ExpiryTime.HasValue || x.ExpiryTime.HasValue && x.ExpiryTime.Value > now)))?.Url;
         }
 
         private async Task<bool> IsUnique(string code)
         {
             var now = DateTime.Now;
-            if (await QueryNoTracking.AnyAsync(x => x.Code == code && x.IsDelete == false && (!x.ExpiryTime.HasValue || x.ExpiryTime.HasValue && x.ExpiryTime.Value > now))) return false;
+            if (await QueryNoTracking().AnyAsync(x => x.Code == code && x.IsDelete == false && (!x.ExpiryTime.HasValue || x.ExpiryTime.HasValue && x.ExpiryTime.Value > now))) return false;
             return true;
         }
     }
