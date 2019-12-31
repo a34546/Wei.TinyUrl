@@ -14,9 +14,9 @@ namespace Wei.TinyUrl.Data.Repositories
     {
         readonly IMemoryCache _cache;
         readonly IUnitOfWork _unitOfWork;
-        public UrlMappingRepository(TinyUrlDbContext context,
+        public UrlMappingRepository(DbContext dbDbContext,
             IUnitOfWork unitOfWork,
-            IMemoryCache cache) : base(context)
+            IMemoryCache cache) : base(dbDbContext)
         {
             _cache = cache;
             _unitOfWork = unitOfWork;
