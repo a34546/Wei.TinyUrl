@@ -26,6 +26,7 @@ namespace Wei.TinyUrl.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
+            //·â×°µÄRepository¿â£ºhttps://github.com/a34546/Wei.Repository
             services.AddRepository<TinyUrlDbContext>(ops =>
             {
                 ops.UseMySql(Configuration.GetConnectionString("MysqlUser"));
